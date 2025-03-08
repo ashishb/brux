@@ -18,3 +18,56 @@ Features
 - [x] Support saving output
 - [x] Pretty print JSON
 - [ ] Add ability to run against multiple environments and compare the results
+
+## Install
+
+```bash
+$ go install github.com/ashishb/brux/src/brux/cmd/brux@latest
+...
+```
+
+Or run it directly
+
+```bash
+$ go run github.com/ashishb/brux/src/brux/cmd/brux@latest --help
+Usage:
+  brux [flags]
+  brux [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  run         Run a Bru file
+
+Flags:
+  -h, --help   help for brux
+```
+
+## Usage
+
+Consider a sample `example.bru` file
+
+```bru
+meta {
+  name: Send request to example.com
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://example.com/
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+```
+
+You can run it as
+
+```bash
+$ go run github.com/ashishb/brux/src/brux/cmd/brux@latest run example.bru
+...
+```
