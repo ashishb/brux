@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -147,6 +148,7 @@ func (cfg Config) getVariablesFromBruEnvironment() (map[string]string, error) {
 		if fileExists(file) {
 			return getVariablesFromFile(file)
 		}
+
 		if isBrunoCollectionRootDir(parentDir) {
 			log.Warn().
 				Str("dir", parentDir).
@@ -162,18 +164,26 @@ func (cfg Config) getVariablesFromBruEnvironment() (map[string]string, error) {
 func (cfg Config) getVariablesFromEnvFile() (map[string]string, error) {
 	parentDir := path.Dir(cfg.bruFilePath)
 	for {
+		log.Debug().
+			Str("dir", parentDir).
+			Str("envName", cfg.environmentName).
+			Msg("searching for '.env' file")
 		envFile := path.Join(parentDir, ".env")
 		if fileExists(envFile) {
 			return getVariablesFromEnvFile(envFile)
 		}
 		if isBrunoCollectionRootDir(parentDir) {
-			log.Warn().
+			log.Info().
 				Str("envDir", parentDir).
 				Str("envName", cfg.environmentName).
 				Msg("reached top of bruno collection dir but '.env' file not found")
 			break
 		}
-		parentDir = path.Dir(parentDir)
+		currentDir, err := filepath.Abs(parentDir)
+		if err != nil {
+			return nil, fmt.Errorf("could not get absolute path of '%s': %w", parentDir, err)
+		}
+		parentDir = path.Dir(currentDir)
 		if parentDir == "/" {
 			break
 		}
@@ -250,8 +260,8 @@ func getHash(data []byte) string {
 func fileExists(filePath string) bool {
 	stat, err := os.Stat(filePath)
 	if err != nil && errors.Is(err, os.ErrNotExist) {
-		log.Info().
-			Str("file", filePath).
+		log.Debug().
+			Str("filePath", filePath).
 			Msg("file does not exist")
 		return false
 	}
