@@ -7,7 +7,7 @@
 [![Lint Go](https://github.com/ashishb/brux/actions/workflows/lint-go.yaml/badge.svg)](https://github.com/ashishb/brux/actions/workflows/lint-go.yaml)
 [![Validate Go code formatting](https://github.com/ashishb/brux/actions/workflows/format-go.yaml/badge.svg)](https://github.com/ashishb/brux/actions/workflows/format-go.yaml)
 
-Brux is a CLI tool written in Go for executing [Bru files](https://github.com/brulang/bru-lang) used by [Bruno](https://github.com/usebruno/bruno).
+Brux is a CLI tool written in Go for executing [Bruno](https://github.com/usebruno/bruno)'s [Bru files](https://github.com/brulang/bru-lang).
 
 Features
 
