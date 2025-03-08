@@ -403,7 +403,6 @@ linters:
     - staticcheck  # Staticcheck is a go vet on steroids, applying a ton of static analysis checks
     # - stylecheck  # Stylecheck is a replacement for golint. Re-enable it later.
     # - tagalign  # TagAlign is used to align and sort tags in Go struct. It can make the struct more readable and easier to maintain. Re-enable it later.
-    - tenv  # tenv is analyzer that detects using os.Setenv instead of t.Setenv since Go1.17
     - testifylint  # Checks usage of github.com/stretchr/testify. [auto-fix]
     - thelper   # Thelper detects tests helpers which is not start with t.Helper() method.
     - tparallel  # tparallel detects inappropriate usage of t.Parallel() method in your Go test codes
@@ -413,6 +412,7 @@ linters:
     - unused  # Checks Go code for unused constants, variables, functions and types
     - unused  # Checks Go code for unused constants, variables, functions and types.
     - usestdlibvars  # A linter that detect the possibility to use variables/constants from the Go standard library.
+    - usetesting  # Checks that the testing package is used correctly
     - wastedassign  # wastedassign finds wasted assignment statements.
     - whitespace  # Tool for detection of leading and trailing whitespace
     - zerologlint
