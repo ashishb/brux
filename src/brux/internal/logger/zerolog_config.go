@@ -14,7 +14,7 @@ import (
 )
 
 const (
-	_defaultLogLevel = zerolog.DebugLevel
+	_defaultLogLevel = zerolog.InfoLevel
 )
 
 var _initLogging sync.Once
