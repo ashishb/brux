@@ -5,7 +5,7 @@ go 1.23.4
 require (
 	github.com/gabriel-vasile/mimetype v1.4.8
 	github.com/hashicorp/go-envparse v0.1.0
-	github.com/rs/zerolog v1.33.0
+	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.49.1
 	github.com/spf13/cobra v1.9.1
 	github.com/spf13/viper v1.19.0
