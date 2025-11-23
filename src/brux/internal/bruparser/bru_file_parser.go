@@ -64,8 +64,8 @@ func NewBruFile(reader io.Reader) (*BruFile, error) {
 			Any("section", section.sectionName).
 			Any("values", section.sectionValues).
 			Msg("section")
-		switch {
-		case section.sectionName == "meta":
+		switch section.sectionName {
+		case "meta":
 			metaSection = &_Meta{
 				name:    section.sectionValues["name"],
 				reqType: section.sectionValues["type"],
@@ -74,9 +74,7 @@ func NewBruFile(reader io.Reader) (*BruFile, error) {
 			if metaSection.reqType != "http" {
 				return nil, fmt.Errorf("%w: '%s'", ErrUnsupportedNetworkRequestType, metaSection.reqType)
 			}
-		case section.sectionName == "get" ||
-			section.sectionName == "head" ||
-			section.sectionName == "post":
+		case "get", "head", "post":
 			urlStr := section.sectionValues["url"]
 			reqSection = &_Request{
 				httpMethod: section.sectionName,
@@ -84,15 +82,15 @@ func NewBruFile(reader io.Reader) (*BruFile, error) {
 				auth:       section.sectionValues["auth"],
 				url:        urlStr,
 			}
-		case section.sectionName == "headers":
+		case "headers":
 			for k, v := range section.sectionValues {
 				headers[k] = v
 			}
-		case section.sectionName == "vars":
+		case "vars":
 			for k, v := range section.sectionValues {
 				vars[k] = v
 			}
-		case section.sectionName == "body:json":
+		case "body:json":
 			bodyJson = &section.sectionData
 		default:
 			return nil, fmt.Errorf("%w: '%s'", ErrUnknownSectionName, section.sectionName)
