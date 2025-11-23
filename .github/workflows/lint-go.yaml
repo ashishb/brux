@@ -47,7 +47,7 @@ jobs:
         run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
 
       - name: Run golangci-lint on src/brux
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v9
         with:
           # We use cache provided by "actions/setup-go"
           skip-cache: true
