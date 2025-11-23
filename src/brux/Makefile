@@ -11,6 +11,9 @@ lint:
 	go vet ./...
 	golangci-lint run
 
+update_deps:
+	go get -t -u ./...
+
 test:
 	go test ./... -v
 
