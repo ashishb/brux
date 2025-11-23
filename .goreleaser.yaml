@@ -18,7 +18,7 @@ builds:
       - linux
       - windows
       - darwin
-    binary: gabo
+    binary: brux
 
 archives:
   - formats: ["tar.gz"]
