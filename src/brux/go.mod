@@ -3,7 +3,7 @@ module github.com/ashishb/brux/src/brux
 go 1.25.4
 
 require (
-	github.com/gabriel-vasile/mimetype v1.4.12
+	github.com/gabriel-vasile/mimetype v1.4.13
 	github.com/hashicorp/go-envparse v0.1.0
 	github.com/rs/zerolog v1.34.0
 	github.com/samber/lo v1.52.0
