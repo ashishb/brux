@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"maps"
 	"os"
 	"path"
 	"path/filepath"
@@ -120,12 +121,8 @@ func (cfg Config) getVariables() (map[string]string, error) {
 	}
 
 	variables := make(map[string]string, len(var1)+len(var2))
-	for k, v := range var1 {
-		variables[k] = v
-	}
-	for k, v := range var2 {
-		variables[k] = v
-	}
+	maps.Copy(variables, var1)
+	maps.Copy(variables, var2)
 	return variables, nil
 }
 
