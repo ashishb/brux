@@ -5,11 +5,11 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"maps"
 	"net/http"
 	"strings"
 
 	"github.com/rs/zerolog/log"
-	"github.com/samber/lo"
 )
 
 // BruFile is a struct that represents a Bru file
@@ -83,13 +83,9 @@ func NewBruFile(reader io.Reader) (*BruFile, error) {
 				url:        urlStr,
 			}
 		case "headers":
-			for k, v := range section.sectionValues {
-				headers[k] = v
-			}
+			maps.Copy(headers, section.sectionValues)
 		case "vars":
-			for k, v := range section.sectionValues {
-				vars[k] = v
-			}
+			maps.Copy(vars, section.sectionValues)
 		case "body:json":
 			bodyJson = &section.sectionData
 		default:
@@ -115,7 +111,7 @@ func (f BruFile) URL() (*string, error) {
 	if hasUnreplacedVariables(u1) {
 		return nil, fmt.Errorf("%w: '%s'", ErrTemplateVariablesFound, u1)
 	}
-	return lo.ToPtr(u1), nil
+	return new(u1), nil
 }
 
 func (f BruFile) RequestBody() (io.Reader, error) {
@@ -155,9 +151,7 @@ func (f BruFile) SetVariables(variables map[string]string) {
 		f.vars = make(map[string]string)
 	}
 
-	for k, v := range variables {
-		f.vars[k] = v
-	}
+	maps.Copy(f.vars, variables)
 
 	log.Debug().
 		Int("variables", len(f.vars)).
