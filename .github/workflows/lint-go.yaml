@@ -7,11 +7,15 @@ on:  # yamllint disable-line rule:truthy
     branches: [main, master]
     paths:
       - "**.go"
+      - "**/go.mod"
+      - "**/go.sum"
       - ".github/workflows/lint-go.yaml"
   pull_request:
     branches: [main, master]
     paths:
       - "**.go"
+      - "**/go.mod"
+      - "**/go.sum"
       - ".github/workflows/lint-go.yaml"
 
 
