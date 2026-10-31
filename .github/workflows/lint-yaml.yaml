@@ -59,4 +59,4 @@ jobs:
                 level: warning
 
       - name: Lint GitHub Actions
-        uses: reviewdog/action-actionlint@419a49378266e892f40c773b4f2fc6de9aa87499  # v1
+        uses: reviewdog/action-actionlint@cfa6a621f27735ccc88d35af9d0608692fd9b9f7  # v1
